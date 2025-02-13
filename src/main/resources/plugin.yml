@@ -1,0 +1,6 @@
+name: RcGacha
+version: '0.1.0-beta'
+main: net.azisaba.rcgacha.RcGacha
+api-version: '1.21'
+authors: [ sysnote8 ]
+description: Gacha plugin for rcpve

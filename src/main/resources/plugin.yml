@@ -4,3 +4,6 @@ main: net.azisaba.rcgacha.RcGacha
 api-version: '1.21'
 authors: [ sysnote8 ]
 description: Gacha plugin for rcpve
+commands:
+  rcgacha:
+    permission: rcgacha.cmd.rcgacha

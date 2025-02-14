@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "2.1.10"
     kotlin("plugin.serialization") version "1.4.20"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "9.0.0-beta8"
 }
 
 group = "net.azisaba.rcgacha"
@@ -15,12 +15,25 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven("https://repo.aikar.co/content/groups/aikar/") {
+        name = "aikar-repo"
+    }
+}
+
+tasks.compileJava {
+    options.compilerArgs.add("-parameters")
+    options.isFork = true
+    options.forkOptions.executable = System.getProperty("java.home") + "/bin/javac"
 }
 
 dependencies {
+    // system
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+
+    // library
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.charleskorn.kaml:kaml:0.72.0")
+    implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 }
 
 val targetJavaVersion = 21
@@ -30,6 +43,11 @@ kotlin {
 
 tasks.build {
     dependsOn("shadowJar")
+}
+
+tasks.shadowJar {
+    relocate("co.aikar.commands", "net.azisaba.rcgacha.shadow.acf")
+    relocate("co.aikar.locales", "net.azisaba.rcgacha.shadow.locales")
 }
 
 tasks.processResources {

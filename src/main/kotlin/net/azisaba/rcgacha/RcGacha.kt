@@ -1,23 +1,35 @@
 package net.azisaba.rcgacha
 
+import co.aikar.commands.PaperCommandManager
 import com.charleskorn.kaml.Yaml
-import org.bukkit.Bukkit
+import net.azisaba.rcgacha.command.RcGachaCommand
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
+fun prefixed(message: String) = "[RcGacha] $message"
+
 class RcGacha : JavaPlugin() {
+    lateinit var config: RcGachaConfig
+    lateinit var commandManager: PaperCommandManager
+
     override fun onEnable() {
         // mkdir data folder
         dataFolder.mkdirs()
 
+        // if a config file wasn't found
         if (!getConfigFile().exists()) {
             saveDefaultConfig()
-            logger.info("Please edit config & reload plugin.")
-            Bukkit.getPluginManager().disablePlugin(this)
-            return
+            logger.info("Wrote new config file. Please edit it.")
         }
 
-        val config = loadConfig()
+        // get fresh config
+        refreshConfig()
+
+        commandManager = PaperCommandManager(this)
+        commandManager.enableUnstableAPI("brigadier")
+        commandManager.enableUnstableAPI("help")
+
+        RcGachaCommand(this).register(commandManager)
     }
 
     override fun onDisable() {
@@ -28,13 +40,19 @@ class RcGacha : JavaPlugin() {
         saveConfig(RcGachaConfig())
     }
 
-    private fun saveConfig(config: RcGachaConfig) {
+    override fun saveConfig() {
+        saveConfig(config)
+    }
+
+    fun saveConfig(config: RcGachaConfig) {
         getConfigFile().writeText(
             Yaml.default.encodeToString(RcGachaConfig.serializer(), config),
         )
     }
 
-    private fun loadConfig(): RcGachaConfig = Yaml.default.decodeFromString(RcGachaConfig.serializer(), getConfigFile().readText())
+    fun refreshConfig() {
+        config = Yaml.default.decodeFromString(RcGachaConfig.serializer(), getConfigFile().readText())
+    }
 
     private fun getConfigFile(): File = File(dataFolder, "config.yml")
 }

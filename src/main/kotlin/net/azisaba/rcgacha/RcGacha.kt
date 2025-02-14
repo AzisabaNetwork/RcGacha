@@ -26,7 +26,6 @@ class RcGacha : JavaPlugin() {
         refreshConfig()
 
         commandManager = PaperCommandManager(this)
-        commandManager.enableUnstableAPI("brigadier")
         commandManager.enableUnstableAPI("help")
 
         RcGachaCommand(this).register(commandManager)

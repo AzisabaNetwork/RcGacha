@@ -18,16 +18,22 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/") {
         name = "aikar-repo"
     }
+    maven("https://mvn.lumine.io/repository/maven-public/") {
+        name = "lumine-repo"
+    }
 }
 
 dependencies {
     // system
     compileOnly(libs.paper.api)
 
-    // library
+    // library(shadow)
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kaml)
     implementation(libs.acf.paper)
+
+    // plugin
+    compileOnly(libs.mythic.dist)
 }
 
 val targetJavaVersion = 21

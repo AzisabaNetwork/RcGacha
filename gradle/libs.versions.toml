@@ -8,6 +8,7 @@ shadow = "9.0.0-beta8"
 paper-api = "1.21.1-R0.1-SNAPSHOT"
 kaml = "0.72.0"
 acf-paper = "0.5.1-SNAPSHOT"
+mythic-dist = "5.6.1"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
@@ -19,3 +20,4 @@ paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
 acf-paper = { module = "co.aikar:acf-paper", version.ref = "acf-paper" }
+mythic-dist = { module = "io.lumine:Mythic-Dist", version.ref = "mythic-dist" }

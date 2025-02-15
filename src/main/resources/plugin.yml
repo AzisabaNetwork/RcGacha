@@ -1,9 +1,10 @@
 name: RcGacha
 version: '0.1.0-beta'
 main: net.azisaba.rcgacha.RcGacha
+description: Gacha plugin for rcpve
 api-version: '1.21'
 authors: [ sysnote8 ]
-description: Gacha plugin for rcpve
+depend: [ MythicMobs ]
 commands:
   rcgacha:
     permission: rcgacha.cmd.rcgacha

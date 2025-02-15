@@ -16,6 +16,7 @@ import net.azisaba.rcgacha.util.prefixedSuccess
 import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import java.util.stream.Collectors
 
 @CommandAlias("rcgacha")
 class RcGachaCommand(
@@ -55,8 +56,12 @@ class RcGachaCommand(
         player: Player,
         @Default("1") count: Int,
     ) {
-        val result = plugin.gachaManager.roll(player.uniqueId)
-        player.sendMessage(prefixedSuccess(result.toString()))
+        val result = plugin.gachaManager.roll(player.uniqueId, count)
+        player.sendMessage(prefixedSuccess("Gacha Result"))
+        result
+            .stream()
+            .collect(Collectors.groupingBy({ r -> r.rarityName }, Collectors.counting()))
+            .forEach { (k, v) -> player.sendMessage(prefixed("$k: $v")) }
     }
 
     @Subcommand("reload")

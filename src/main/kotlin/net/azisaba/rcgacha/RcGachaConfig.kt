@@ -8,7 +8,7 @@ data class RarityConfig(
     val start: Int = 70,
     val end: Int = 100,
     val mmSkillName: String = "none",
-    val items: Map<String, Int> = mapOf("minecraft:stone" to 1),
+    val items: Map<String, Int> = mapOf("stone" to 1),
 )
 
 @Serializable

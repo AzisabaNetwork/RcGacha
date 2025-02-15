@@ -9,7 +9,9 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Description
 import co.aikar.commands.annotation.HelpCommand
 import co.aikar.commands.annotation.Subcommand
+import io.lumine.mythic.bukkit.MythicBukkit
 import net.azisaba.rcgacha.RcGacha
+import net.azisaba.rcgacha.util.failComponent
 import net.azisaba.rcgacha.util.prefixed
 import net.azisaba.rcgacha.util.prefixedFail
 import net.azisaba.rcgacha.util.prefixedSuccess
@@ -47,6 +49,20 @@ class RcGachaCommand(
         help: CommandHelp,
     ) {
         help.showHelp()
+    }
+
+    @Subcommand("roll-single")
+    @Description("Roll gacha once.")
+    @CommandPermission("rcgacha.cmd.roll.single")
+    fun rollSingle(player: Player) {
+        val result = plugin.gachaManager.roll(player.uniqueId)
+        player.sendMessage(prefixedSuccess(result.toString()))
+        player.inventory.addItem(
+            MythicBukkit.inst().itemManager.getItemStack(result.itemName),
+        )
+        if (!MythicBukkit.inst().apiHelper.castSkill(player, result.mmSkillName)) {
+            player.sendMessage(failComponent("Failed to execute skill: ${result.mmSkillName}"))
+        }
     }
 
     @Subcommand("roll")

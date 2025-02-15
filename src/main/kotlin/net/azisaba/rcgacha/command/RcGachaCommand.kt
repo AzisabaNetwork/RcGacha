@@ -15,6 +15,7 @@ import net.azisaba.rcgacha.util.prefixedFail
 import net.azisaba.rcgacha.util.prefixedSuccess
 import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
 @CommandAlias("rcgacha")
 class RcGachaCommand(
@@ -47,6 +48,17 @@ class RcGachaCommand(
         help.showHelp()
     }
 
+    @Subcommand("roll")
+    @Description("Let's roll gacha!")
+    @CommandPermission("rcgacha.cmd.roll")
+    fun roll(
+        player: Player,
+        @Default("1") count: Int,
+    ) {
+        val result = plugin.gachaManager.roll(player.uniqueId)
+        player.sendMessage(prefixedSuccess(result.toString()))
+    }
+
     @Subcommand("reload")
     @Description("Reload RcGacha's assets")
     @CommandPermission("rcgacha.cmd.rcgacha.reload")
@@ -60,7 +72,7 @@ class RcGachaCommand(
     @CommandPermission("rcgacha.cmd.rcgacha.reload.config")
     fun reloadConfig(sender: CommandSender) {
         sender.sendMessage(prefixedSuccess("Reloading configuration..."))
-        plugin.refreshConfig()
+        plugin.updateConfig()
         sender.sendMessage(prefixedSuccess("Reload complete."))
     }
 

@@ -28,7 +28,7 @@ class RarityWeightedChooser : WeightedChooser<String>() {
             for ((k, v) in rarityInfoMap) {
                 val currentRolls = getRollCount(k, playerUuid) ?: 0
                 if (currentRolls >= v.pityStart) {
-                    this@apply.computeIfPresent(k) { _, b -> b + (currentRolls - v.pityStart) }
+                    this@apply.computeIfPresent(k) { _, b -> b + (currentRolls - (v.pityStart - 1)) }
                 }
             }
         }
@@ -76,10 +76,10 @@ class RarityWeightedChooser : WeightedChooser<String>() {
     fun roll(playerUuid: UUID): RarityData {
         val weightMap = getCustomizedMap(playerUuid)
 
-        var randValue = random.nextLong(weightSum)
+        var randValue = random.nextInt(weightMap.values.sum())
         for ((k, v) in weightMap) {
             randValue -= v
-            if (v < 0) {
+            if (randValue < 0) {
                 return getRarityData(k)
             } else {
                 if (addRollCount(k, playerUuid) >= getPityEnd(k)) {

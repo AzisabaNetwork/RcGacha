@@ -43,7 +43,7 @@ class RcGacha : JavaPlugin() {
         saveConfig(config)
     }
 
-    fun saveConfig(config: RcGachaConfig) {
+    private fun saveConfig(config: RcGachaConfig) {
         getConfigFile().writeText(
             Yaml.default.encodeToString(RcGachaConfig.serializer(), config),
         )

@@ -1,0 +1,21 @@
+[versions]
+# plugin version
+kotlin-jvm = "2.1.10"
+kotlin-serialization = "1.4.20"
+shadow = "9.0.0-beta8"
+
+# library version
+paper-api = "1.21.1-R0.1-SNAPSHOT"
+kaml = "0.72.0"
+acf-paper = "0.5.1-SNAPSHOT"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-serialization" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+
+[libraries]
+paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
+acf-paper = { module = "co.aikar:acf-paper", version.ref = "acf-paper" }

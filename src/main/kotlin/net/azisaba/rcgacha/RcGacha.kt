@@ -6,8 +6,6 @@ import net.azisaba.rcgacha.command.RcGachaCommand
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
-fun prefixed(message: String) = "[RcGacha] $message"
-
 class RcGacha : JavaPlugin() {
     lateinit var config: RcGachaConfig
     lateinit var commandManager: PaperCommandManager

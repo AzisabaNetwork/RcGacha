@@ -15,6 +15,8 @@ fun warnComponent(message: String) = message.toComponent().warn()
 
 fun failComponent(message: String) = message.toComponent().fail()
 
+fun prefixed(message: String) = message.toComponent().addPrefix()
+
 fun prefixedSuccess(message: String) = successComponent(message).addPrefix()
 
 fun prefixedWarn(message: String) = warnComponent(message).addPrefix()

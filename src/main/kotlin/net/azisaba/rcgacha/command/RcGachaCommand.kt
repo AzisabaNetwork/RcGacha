@@ -10,6 +10,7 @@ import co.aikar.commands.annotation.Description
 import co.aikar.commands.annotation.HelpCommand
 import co.aikar.commands.annotation.Subcommand
 import net.azisaba.rcgacha.RcGacha
+import net.azisaba.rcgacha.util.prefixed
 import net.azisaba.rcgacha.util.prefixedFail
 import net.azisaba.rcgacha.util.prefixedSuccess
 import net.kyori.adventure.text.Component
@@ -47,9 +48,17 @@ class RcGachaCommand(
         help.showHelp()
     }
 
-    @Subcommand("reload-config")
+    @Subcommand("reload")
+    @Description("Reload RcGacha's assets")
+    @CommandPermission("rcgacha.cmd.rcgacha.reload")
+    fun reload(player: Player) {
+        // If add more reloadable assets, needs to fix this hardcoding.
+        player.sendMessage(prefixed("Reloadable assets: [config]"))
+    }
+
+    @Subcommand("reload config")
     @Description("Reload RcGacha's configuration file")
-    @CommandPermission("rcgacha.cmd.rcgacha.reload-config")
+    @CommandPermission("rcgacha.cmd.rcgacha.reload.config")
     fun reloadConfig(player: Player) {
         player.sendMessage(prefixedSuccess("Reloading configuration..."))
         plugin.refreshConfig()

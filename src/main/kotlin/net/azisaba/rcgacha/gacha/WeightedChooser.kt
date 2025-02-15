@@ -42,6 +42,7 @@ open class WeightedChooser<T> {
         updateSum()
     }
 
+    @NotNull
     open fun roll(): T {
         var randValue = random.nextLong(weightSum)
         for ((k, v) in itemWeightMap) {
@@ -51,6 +52,7 @@ open class WeightedChooser<T> {
         throw RuntimeException("Won't reach here.")
     }
 
+    @NotNull
     open fun roll(draws: Int): List<T> {
         val result = mutableListOf<T>()
         for (i in 0..<draws) {

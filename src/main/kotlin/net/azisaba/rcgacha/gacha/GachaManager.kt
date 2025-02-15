@@ -10,8 +10,8 @@ class GachaManager {
     val rarityChooserMap: HashMap<String, WeightedChooser<String>> = hashMapOf()
 
     fun addRarity(
-        rarityName: String,
-        rarityData: RarityData,
+        @NotNull rarityName: String,
+        @NotNull rarityData: RarityData,
     ) {
         rarityChooser.addRarity(rarityName, rarityData)
         rarityChooserMap[rarityName] = WeightedChooser()
@@ -23,9 +23,9 @@ class GachaManager {
     }
 
     fun addItem(
-        rarityName: String,
-        itemName: String,
-        weight: Int,
+        @NotNull rarityName: String,
+        @NotNull itemName: String,
+        @NotNull weight: Int,
     ) {
         getChooser(rarityName).addItem(itemName, weight)
     }
@@ -38,21 +38,23 @@ class GachaManager {
     }
 
     fun removeItem(
-        rarityName: String,
-        itemName: String,
+        @NotNull rarityName: String,
+        @NotNull itemName: String,
     ) {
         getChooser(rarityName).removeItem(itemName)
     }
 
+    @NotNull
     fun roll(playerUUID: UUID): GachaResult {
         val rarityData = rarityChooser.roll(playerUUID)
         val itemName = getChooser(rarityData.name).roll()
         return GachaResult(itemName, rarityData.name, rarityData.mmSkillName)
     }
 
+    @NotNull
     fun roll(
-        playerUUID: UUID,
-        draws: Int,
+        @NotNull playerUUID: UUID,
+        @NotNull draws: Int,
     ): List<GachaResult> {
         val rarityDataList = rarityChooser.roll(playerUUID, draws)
         val resultList = mutableListOf<GachaResult>()

@@ -15,7 +15,6 @@ import net.azisaba.rcgacha.util.prefixedFail
 import net.azisaba.rcgacha.util.prefixedSuccess
 import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 @CommandAlias("rcgacha")
 class RcGachaCommand(
@@ -51,30 +50,30 @@ class RcGachaCommand(
     @Subcommand("reload")
     @Description("Reload RcGacha's assets")
     @CommandPermission("rcgacha.cmd.rcgacha.reload")
-    fun reload(player: Player) {
+    fun reload(sender: CommandSender) {
         // If add more reloadable assets, needs to fix this hardcoding.
-        player.sendMessage(prefixed("Reloadable assets: [config]"))
+        sender.sendMessage(prefixed("Reloadable assets: [config]"))
     }
 
     @Subcommand("reload config")
     @Description("Reload RcGacha's configuration file")
     @CommandPermission("rcgacha.cmd.rcgacha.reload.config")
-    fun reloadConfig(player: Player) {
-        player.sendMessage(prefixedSuccess("Reloading configuration..."))
+    fun reloadConfig(sender: CommandSender) {
+        sender.sendMessage(prefixedSuccess("Reloading configuration..."))
         plugin.refreshConfig()
-        player.sendMessage(prefixedSuccess("Reload complete."))
+        sender.sendMessage(prefixedSuccess("Reload complete."))
     }
 
     @Subcommand("rarity list")
     @Description("check registered all rarity name")
     @CommandPermission("rcgacha.cmd.rcgacha.rarity.list")
-    fun listAllName(player: Player) {
+    fun listAllName(sender: CommandSender) {
         val rarityNames =
             plugin.config.rarities.values
                 .map { name -> Component.text("- $name") }
 
-        player.sendMessage(Component.text("=== Rarity List ==="))
-        rarityNames.forEach { c -> player.sendMessage(c) }
-        player.sendMessage(Component.text("==================="))
+        sender.sendMessage(Component.text("=== Rarity List ==="))
+        rarityNames.forEach { c -> sender.sendMessage(c) }
+        sender.sendMessage(Component.text("==================="))
     }
 }

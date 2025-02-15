@@ -30,6 +30,13 @@ class GachaManager {
         getChooser(rarityName).addItem(itemName, weight)
     }
 
+    fun addItemByMap(
+        @NotNull rarityName: String,
+        @NotNull itemMap: Map<String, Int>,
+    ) {
+        getChooser(rarityName).addItemByMap(itemMap)
+    }
+
     fun removeItem(
         rarityName: String,
         itemName: String,

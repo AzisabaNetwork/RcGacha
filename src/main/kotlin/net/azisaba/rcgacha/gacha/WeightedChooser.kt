@@ -19,6 +19,19 @@ open class WeightedChooser<T> {
         updateSum()
     }
 
+    fun addItemByMap(
+        @NotNull itemMap: Map<T, Int>,
+    ) {
+        for ((k, v) in itemMap) {
+            if (v <= 0) {
+                throw IllegalArgumentException("weight must be positive number")
+            }
+
+            itemWeightMap[k] = v
+        }
+        updateSum()
+    }
+
     open fun removeItem(
         @NotNull item: T,
     ) {

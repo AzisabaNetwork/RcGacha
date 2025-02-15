@@ -62,6 +62,7 @@ tasks.compileJava {
 }
 
 tasks.shadowJar {
+    minimize()
     relocate("co.aikar.commands", "net.azisaba.rcgacha.shadow.acf")
     relocate("co.aikar.locales", "net.azisaba.rcgacha.shadow.locales")
 }

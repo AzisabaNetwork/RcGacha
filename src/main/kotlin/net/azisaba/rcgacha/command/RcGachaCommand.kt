@@ -72,6 +72,7 @@ class RcGachaCommand(
         player: Player,
         @Default("1") count: Int,
     ) {
+        // TODO: implement give items & fire skills
         val result = plugin.gachaManager.roll(player.uniqueId, count)
         player.sendMessage(prefixedSuccess("Gacha Result"))
         result

@@ -17,6 +17,9 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/") {
         name = "aikar-repo"
     }
+    maven("https://repo.azisaba.net/repository/maven-releases/") {
+        name = "azisaba-repo"
+    }
     maven("https://mvn.lumine.io/repository/maven-public/") {
         name = "lumine-repo"
     }
@@ -33,6 +36,7 @@ dependencies {
 
     // plugin
     compileOnly(libs.mythic.dist)
+    compileOnly(libs.rcitemlogging)
 }
 
 val targetJavaVersion = 21

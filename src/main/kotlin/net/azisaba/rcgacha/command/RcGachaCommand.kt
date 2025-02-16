@@ -15,6 +15,7 @@ import net.azisaba.rcgacha.util.failComponent
 import net.azisaba.rcgacha.util.prefixed
 import net.azisaba.rcgacha.util.prefixedFail
 import net.azisaba.rcgacha.util.prefixedSuccess
+import net.azisaba.rcitemlogging.RcItemLogging
 import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -60,6 +61,13 @@ class RcGachaCommand(
         player.inventory.addItem(
             MythicBukkit.inst().itemManager.getItemStack(result.itemName),
         )
+        RcItemLogging.getApi().put(
+            "rcgacha_roll_single",
+            "#system",
+            player.name,
+            "Player got ${result.itemName}x1",
+            player.uniqueId,
+        )
         if (!MythicBukkit.inst().apiHelper.castSkill(player, result.mmSkillName)) {
             player.sendMessage(failComponent("Failed to execute skill: ${result.mmSkillName}"))
         }
@@ -72,7 +80,7 @@ class RcGachaCommand(
         player: Player,
         @Default("1") count: Int,
     ) {
-        // TODO: implement give items & fire skills
+        // TODO: implement give items & fire skills & logging
         val result = plugin.gachaManager.roll(player.uniqueId, count)
         player.sendMessage(prefixedSuccess("Gacha Result"))
         result

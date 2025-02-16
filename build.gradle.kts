@@ -5,8 +5,7 @@ plugins {
 }
 
 group = "net.azisaba.rcgacha"
-version = "0.1.0-beta"
-
+version = System.getenv("VERSION") ?: "0.1.0-beta"
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/") {

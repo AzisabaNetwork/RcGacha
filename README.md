@@ -46,6 +46,6 @@ rarities:
     | mmSkillNameForBulk | 10連等でそのレアリティが出た時の演出(MMのスキルId)     |
     | items              | そのレアリティの排出アイテム (`<アイテムId>: <重み>`) |
 
-3. `/rcgacha reload gacha`を実行して、新しいガチャの設定を反映する。
-   - 部分リロードはまだ未実装です。ごめんね
+3. `/rcgacha load-gacha <ファイル名(.ymlなし)>`を実行して、新しいガチャの設定を反映する。
+   - 一緒に全部をリロードしたいときは、`/rcgacha reload gacha`
 4. おしまい

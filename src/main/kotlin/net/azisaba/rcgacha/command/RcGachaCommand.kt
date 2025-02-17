@@ -141,6 +141,18 @@ class RcGachaCommand(
         sender.sendMessage(prefixedSuccess("New gacha file: $newGachaName.yml was created."))
     }
 
+    @Subcommand("load-gacha")
+    @Description("Load specific gacha file")
+    @CommandPermission("rcgacha.cmd.rcgacha.load.gacha")
+    fun loadGachaFile(
+        sender: CommandSender,
+        targetGachaName: String,
+    ) {
+        sender.sendMessage(prefixed("Loading gacha... name: $targetGachaName"))
+        plugin.gachaManager.loadGacha(targetGachaName)
+        sender.sendMessage(prefixedSuccess("Gacha loading completed. name: $targetGachaName"))
+    }
+
     @Subcommand("reload")
     @Description("Reload RcGacha's assets")
     @CommandPermission("rcgacha.cmd.rcgacha.reload")

@@ -12,4 +12,5 @@ fun toRarityData(
     pityStart = config.start,
     pityEnd = config.end,
     mmSkillName = config.mmSkillName,
+    mmSkillNameForBulk = config.mmSkillNameForBulk,
 )

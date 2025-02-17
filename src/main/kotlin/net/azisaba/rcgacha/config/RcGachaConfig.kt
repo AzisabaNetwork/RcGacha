@@ -1,5 +1,8 @@
 package net.azisaba.rcgacha.config
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class RcGachaConfig(
-    val a: String = "",
+    val version: Int = 0,
 )

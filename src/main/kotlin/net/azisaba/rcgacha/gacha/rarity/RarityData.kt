@@ -6,4 +6,5 @@ data class RarityData(
     val pityStart: Int,
     val pityEnd: Int,
     val mmSkillName: String,
+    val mmSkillNameForBulk: String,
 )

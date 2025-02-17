@@ -7,7 +7,8 @@ data class RarityConfig(
     val base: Int = 10,
     val start: Int = 70,
     val end: Int = 100,
-    val mmSkillName: String = "none",
+    val mmSkillName: String = "single",
+    val mmSkillNameForBulk: String = "bulk",
     val items: Map<String, Int> = mapOf("stone" to 1),
 )
 

@@ -3,18 +3,21 @@ package net.azisaba.rcgacha
 import co.aikar.commands.PaperCommandManager
 import com.charleskorn.kaml.Yaml
 import net.azisaba.rcgacha.command.RcGachaCommand
-import net.azisaba.rcgacha.config.GachaConfig
+import net.azisaba.rcgacha.config.RcGachaConfig
 import net.azisaba.rcgacha.gacha.GachaManager
-import net.azisaba.rcgacha.util.toRarityData
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 class RcGacha : JavaPlugin() {
-    lateinit var config: GachaConfig
+    lateinit var config: RcGachaConfig
+
     lateinit var gachaManager: GachaManager
     lateinit var commandManager: PaperCommandManager
+    lateinit var gachaFolder: File
 
     override fun onEnable() {
+        gachaFolder = File(dataFolder, "gacha")
+
         // mkdir data folder
         dataFolder.mkdirs()
 
@@ -27,11 +30,17 @@ class RcGacha : JavaPlugin() {
         // get fresh config
         loadConfig()
 
+        gachaManager = GachaManager(logger, gachaFolder)
+
         // update gacha data
         updateGachaData()
 
         commandManager = PaperCommandManager(this)
         commandManager.enableUnstableAPI("help")
+
+        commandManager.commandCompletions.registerAsyncCompletion("gachaname") {
+            gachaManager.getAllGachaNames()
+        }
 
         RcGachaCommand(this).register(commandManager)
     }
@@ -41,35 +50,30 @@ class RcGacha : JavaPlugin() {
     }
 
     override fun saveDefaultConfig() {
-        saveConfig(GachaConfig())
+        saveConfig(RcGachaConfig())
     }
 
     override fun saveConfig() {
         saveConfig(config)
     }
 
-    private fun saveConfig(config: GachaConfig) {
+    private fun saveConfig(config: RcGachaConfig) {
         getConfigFile().writeText(
-            Yaml.default.encodeToString(GachaConfig.serializer(), config),
+            Yaml.default.encodeToString(RcGachaConfig.serializer(), config),
         )
+    }
+
+    private fun loadConfig() {
+        config = Yaml.default.decodeFromString(RcGachaConfig.serializer(), getConfigFile().readText())
     }
 
     fun updateConfig() {
         reloadConfig()
-        updateGachaData()
     }
 
-    private fun loadConfig() {
-        config = Yaml.default.decodeFromString(GachaConfig.serializer(), getConfigFile().readText())
-    }
-
-    private fun updateGachaData() {
+    fun updateGachaData() {
         logger.info("Updating gacha data...")
-        gachaManager = GachaManager()
-        for ((k, v) in config.rarities) {
-            gachaManager.addRarity(k, toRarityData(k, v))
-            gachaManager.addItemByMap(k, v.items)
-        }
+        gachaManager.loadAllGacha()
         logger.info("Gacha data was updated!")
     }
 

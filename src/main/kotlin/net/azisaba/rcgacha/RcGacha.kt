@@ -3,13 +3,14 @@ package net.azisaba.rcgacha
 import co.aikar.commands.PaperCommandManager
 import com.charleskorn.kaml.Yaml
 import net.azisaba.rcgacha.command.RcGachaCommand
+import net.azisaba.rcgacha.config.GachaConfig
 import net.azisaba.rcgacha.gacha.GachaManager
 import net.azisaba.rcgacha.util.toRarityData
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 class RcGacha : JavaPlugin() {
-    lateinit var config: RcGachaConfig
+    lateinit var config: GachaConfig
     lateinit var gachaManager: GachaManager
     lateinit var commandManager: PaperCommandManager
 
@@ -40,16 +41,16 @@ class RcGacha : JavaPlugin() {
     }
 
     override fun saveDefaultConfig() {
-        saveConfig(RcGachaConfig())
+        saveConfig(GachaConfig())
     }
 
     override fun saveConfig() {
         saveConfig(config)
     }
 
-    private fun saveConfig(config: RcGachaConfig) {
+    private fun saveConfig(config: GachaConfig) {
         getConfigFile().writeText(
-            Yaml.default.encodeToString(RcGachaConfig.serializer(), config),
+            Yaml.default.encodeToString(GachaConfig.serializer(), config),
         )
     }
 
@@ -59,7 +60,7 @@ class RcGacha : JavaPlugin() {
     }
 
     private fun loadConfig() {
-        config = Yaml.default.decodeFromString(RcGachaConfig.serializer(), getConfigFile().readText())
+        config = Yaml.default.decodeFromString(GachaConfig.serializer(), getConfigFile().readText())
     }
 
     private fun updateGachaData() {

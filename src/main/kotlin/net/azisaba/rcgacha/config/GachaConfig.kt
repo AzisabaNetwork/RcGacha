@@ -1,4 +1,4 @@
-package net.azisaba.rcgacha
+package net.azisaba.rcgacha.config
 
 import kotlinx.serialization.Serializable
 
@@ -12,7 +12,7 @@ data class RarityConfig(
 )
 
 @Serializable
-data class RcGachaConfig(
+data class GachaConfig(
     val rarities: Map<String, RarityConfig> =
         mapOf(
             "1" to RarityConfig(),

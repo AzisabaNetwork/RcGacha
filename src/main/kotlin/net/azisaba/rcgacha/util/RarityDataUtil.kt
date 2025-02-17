@@ -1,6 +1,6 @@
 package net.azisaba.rcgacha.util
 
-import net.azisaba.rcgacha.RarityConfig
+import net.azisaba.rcgacha.config.RarityConfig
 import net.azisaba.rcgacha.gacha.rarity.RarityData
 
 fun toRarityData(

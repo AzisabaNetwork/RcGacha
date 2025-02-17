@@ -54,7 +54,7 @@ class RcGachaCommand(
 
     @Subcommand("roll-single")
     @Description("Roll gacha once.")
-    @CommandPermission("rcgacha.cmd.roll.single")
+    @CommandPermission("rcgacha.cmd.rcgacha.roll.single")
     @CommandCompletion("@players @gachaname")
     fun rollSingle(
         sender: CommandSender,
@@ -85,7 +85,7 @@ class RcGachaCommand(
 
     @Subcommand("roll-many")
     @Description("Let's roll gacha!")
-    @CommandPermission("rcgacha.cmd.roll.many")
+    @CommandPermission("rcgacha.cmd.rcgacha.roll.many")
     @CommandCompletion("@players @gachaname @range:1-20")
     fun roll(
         sender: CommandSender,
@@ -128,6 +128,17 @@ class RcGachaCommand(
                     player.uniqueId,
                 )
             }
+    }
+
+    @Subcommand("new-gacha")
+    @Description("Create new gacha file")
+    @CommandPermission("rcgacha.cmd.rcgacha.new.gacha")
+    fun generateNewGachaFile(
+        sender: CommandSender,
+        newGachaName: String,
+    ) {
+        plugin.gachaManager.saveExampleGachaData(newGachaName)
+        sender.sendMessage(prefixedSuccess("New gacha file: $newGachaName.yml was created."))
     }
 
     @Subcommand("reload")

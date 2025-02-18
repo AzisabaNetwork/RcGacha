@@ -1,6 +1,18 @@
 ## RcGacha
 Gacha plugin for rcpve
 
+---
+## コマンド
+### 全般
+- `/rcgacha help`
+  - ヘルプが見れます。
+### ガチャを引く
+- `/rcgacha roll-single <playerName> <gachaName>`
+  - `<playerName>`で指定したプレイヤーに、`<gachaName>`で指定したガチャを一回引かせます。
+- `/rcgacha roll-many <playerName> <gachaName> <count>`
+  - `/rcgacha roll-single`を複数回引けるようにしたコマンドです。
+
+---
 ## 設定ファイル
 ```yml
 rarities:
@@ -31,6 +43,7 @@ rarities:
 ```
 こんな形のymlファイルが、plugins/RcGacha/gacha/_example.ymlに保存されます。
 
+---
 ## 設定方法
 1. 新しいガチャファイルを作成する
    - これを複製する
@@ -43,7 +56,7 @@ rarities:
     | start              | 天井開始の回転数                          |
     | end                | 天井終了の回転数                          |
     | mmSkillName        | 単発でそのレアリティが出た時の演出(MMのスキルId)       |
-    | mmSkillNameForBulk | 10連等でそのレアリティが出た時の演出(MMのスキルId)     |
+    | mmSkillNameForBulk | 10連でそのレアリティが出た時の演出(MMのスキルId)      |
     | items              | そのレアリティの排出アイテム (`<アイテムId>: <重み>`) |
 
 3. `/rcgacha load-gacha <ファイル名(.ymlなし)>`を実行して、新しいガチャの設定を反映する。

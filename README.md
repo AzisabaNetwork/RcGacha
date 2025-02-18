@@ -3,9 +3,23 @@ Gacha plugin for rcpve
 
 ---
 ## コマンド
+
 ### 全般
 - `/rcgacha help`
   - ヘルプが見れます。
+
+### ガチャファイルを作成
+- `/rcgacha new-gacha <gachaName>`
+
+### ガチャファイルを読み込み
+- `/rcgacha load-gacha <gachaName>`
+
+### ファイルの再読み込み
+- `/rcgacha reload <reloadTarget>`
+  - reloadTargetの一覧
+    - `gacha` -> ガチャ (`/gacha`以下のガチャファイル)
+    - `config` -> 設定ファイル (config.yml)
+
 ### ガチャを引く
 - `/rcgacha roll-single <playerName> <gachaName>`
   - `<playerName>`で指定したプレイヤーに、`<gachaName>`で指定したガチャを一回引かせます。

@@ -67,7 +67,7 @@ class RcGachaCommand(
                 sender.sendMessage(failComponent("Failed to roll gacha."))
                 return
             }
-        sender.sendMessage(prefixedSuccess(result.toString()))
+//        sender.sendMessage(prefixedSuccess(result.toString()))
         player.inventory.addItem(
             MythicBukkit.inst().itemManager.getItemStack(result.itemName),
         )
@@ -99,7 +99,7 @@ class RcGachaCommand(
                 sender.sendMessage(failComponent("Failed to roll gacha."))
                 return
             }
-        sender.sendMessage(prefixedSuccess("Gacha Result"))
+//        sender.sendMessage(prefixedSuccess("Gacha was rolled!"))
         result
             .stream()
             .collect(Collectors.groupingBy({ r -> r.rarityName }, Collectors.counting()))

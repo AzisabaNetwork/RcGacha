@@ -11,7 +11,10 @@ import co.aikar.commands.annotation.Description
 import co.aikar.commands.annotation.HelpCommand
 import co.aikar.commands.annotation.Subcommand
 import io.lumine.mythic.bukkit.MythicBukkit
+import net.azisaba.itemstash.ItemStash
 import net.azisaba.rcgacha.RcGacha
+import net.azisaba.rcgacha.extension.serializeToStr
+import net.azisaba.rcgacha.integration.getMythicStack
 import net.azisaba.rcgacha.util.failComponent
 import net.azisaba.rcgacha.util.prefixed
 import net.azisaba.rcgacha.util.prefixedFail
@@ -114,17 +117,19 @@ class RcGachaCommand(
         result
             .stream()
             .collect(Collectors.groupingBy({ r -> r.itemName }, Collectors.counting()))
-            .forEach { (k, v) ->
-                player.inventory.addItem(
-                    MythicBukkit.inst().itemManager.getItemStack(k).apply {
-                        amount = v.toInt()
-                    },
-                )
+            .map { (id, amount) -> getMythicStack(id, amount.toInt()) }
+            .toTypedArray()
+            .also { stackList ->
+                val remainingStackMap = player.inventory.addItem(*stackList)
+                remainingStackMap.values.forEach { i ->
+                    ItemStash.getInstance().addItemToStash(player.uniqueId, i)
+                }
+            }.forEach { i ->
                 RcItemLogging.getApi().put(
-                    "rcgacha_roll_single",
+                    "rcgacha_roll",
                     "#system",
                     player.name,
-                    "Player got $k +$v",
+                    "Player got ${i.displayName().serializeToStr()} +${i.amount}",
                     player.uniqueId,
                 )
             }

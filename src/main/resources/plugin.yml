@@ -4,7 +4,7 @@ main: net.azisaba.rcgacha.RcGacha
 description: Gacha plugin for rcpve
 api-version: '1.21'
 authors: [ sysnote8 ]
-depend: [ RcItemLogging, MythicMobs ]
+depend: [ RcItemLogging, MythicMobs, ItemStash ]
 commands:
   rcgacha:
     permission: rcgacha.cmd.rcgacha

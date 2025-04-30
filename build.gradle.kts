@@ -37,6 +37,7 @@ dependencies {
     // plugin
     compileOnly(libs.mythic.dist)
     compileOnly(libs.rcitemlogging)
+    compileOnly(libs.itemstash)
 }
 
 val targetJavaVersion = 21

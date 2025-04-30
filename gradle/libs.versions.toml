@@ -10,6 +10,7 @@ kaml = "0.72.0"
 acf-paper = "0.5.1-SNAPSHOT"
 mythic-dist = "5.6.1"
 rcitemlogging = "0.2.1"
+itemstash = "2.2.3"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
@@ -23,3 +24,4 @@ kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
 acf-paper = { module = "co.aikar:acf-paper", version.ref = "acf-paper" }
 mythic-dist = { module = "io.lumine:Mythic-Dist", version.ref = "mythic-dist" }
 rcitemlogging = { module = "net.azisaba.rcitemlogging:RcItemLogging", version.ref = "rcitemlogging" }
+itemstash = { module = "net.azisaba:ItemStash", version.ref = "itemstash" }
